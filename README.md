@@ -1,14 +1,18 @@
 # 🛒 Tech Store
 
-مشروع متجر إلكتروني بسيط مبني باستخدام:
-- Vue 3 + Tailwind CSS (Frontend)
-- Node.js + Express + MongoDB (Backend)
+A simple e-commerce web application built with:
 
-## 🚀 الخصائص الأساسية
-- تسجيل / تسجيل دخول المستخدمين
-- عرض المنتجات
-- إضافة المنتجات إلى السلة
-- الدفع وتأكيد الطلب
-- إدارة الحساب والطلبات
+- **Frontend**: Vue 3 (Composition API), Vue Router, Pinia, Tailwind CSS
+- **Backend**: Node.js, Express.js, MongoDB
 
-## 📁 هيكل المشروع
+## 🚀 Features
+
+- User Authentication (Login/Register with JWT)
+- Product Listing and Filtering
+- Product Details with Ratings and Variations
+- Shopping Cart and Checkout
+- Order History and User Profile
+- Admin Panel (coming soon)
+
+## 📁 Project Structure
+
