@@ -1,0 +1,33 @@
+# Ignore sensitive files and directories
+.env
+*.key
+*.pem
+*.crt
+*.pfx
+*.p12
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.bak
+
+# Ignore node_modules and dependencies
+node_modules/
+bower_components/
+
+# Ignore build and output directories
+dist/
+build/
+out/
+
+# Ignore IDE and editor settings
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
