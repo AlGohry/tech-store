@@ -26,9 +26,15 @@ const swaggerOptions = {
         url: 'http://localhost:5000',
       },
     ],
+    security: [{
+      bearerAuth: []
+    }]
   },
-  apis: ['./routes/authRoutes.js'], // Path to the API docs
-}
+  apis: [
+    './routes/authRoutes.js',
+    './routes/productRoutes.js',
+  ],
+};
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))

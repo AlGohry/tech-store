@@ -2,7 +2,53 @@ import express from 'express'
 import { loginUser, registerUser } from '../controllers/authController.js'
 
 const router = express.Router()
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   description: Product management APIs
+ */
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Authenticate an existing user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: The user's email address
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: The user's password
+ *     responses:
+ *       200:
+ *         description: User authenticated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: JWT authentication token
+ *       400:
+ *         description: Invalid credentials or bad request
+ *       401:
+ *         description: Unauthorized - incorrect email or password
+ */
 router.post('/login', loginUser)
 /**
  * @swagger
