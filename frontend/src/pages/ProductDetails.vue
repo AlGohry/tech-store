@@ -1,6 +1,9 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-12">
+  <div class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- NavBar component -->
+    <NavBar />
+
+    <div class="flex-grow container mx-auto px-4 py-12">
       <div v-if="product" class="max-w-6xl mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex mb-8" aria-label="Breadcrumb">
@@ -57,7 +60,7 @@
                 <span class="text-gray-600 text-sm">(24 reviews)</span>
               </div>
 
-              <span class="text-3xl font-bold text-gray-900 block mb-6">${{ product.price }}</span>
+              <span class="text-3xl font-bold text-gray-900 block mb-6">SAR {{ product.price }}</span>
 
               <p class="text-gray-700 mb-6">{{ product.description }}</p>
 
@@ -87,13 +90,22 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer component -->
+    <Footer />
   </div>
 </template>
 
 <script>
 import axios from '../plugins/axios'; // Import axios from the plugins folder
+import NavBar from '../components/NavBar.vue'; // Import NavBar component
+import Footer from '../components/Footer.vue'; // Import Footer component
 
 export default {
+  components: {
+    NavBar, // Register NavBar component
+    Footer // Register Footer component
+  },
   data() {
     return {
       product: null
