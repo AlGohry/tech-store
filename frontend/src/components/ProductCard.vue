@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+    class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md  duration-300">
     <div class="relative">
       <img :src="product.image" :alt="product.name" class="w-full h-56 object-cover">
       <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -13,7 +13,7 @@
       <p class="text-gray-600 mb-4 line-clamp-3">{{ product.description }}</p>
 
       <div class="flex items-center justify-between mb-4">
-        <span class="text-2xl font-bold text-gray-900">${{ product.price }}</span>
+        <span class="text-2xl font-bold text-gray-900">SAR {{ product.price }}</span>
         <div class="flex items-center text-yellow-400">
           <svg v-for="i in 5" :key="i" class="w-5 h-5" :class="{ 'text-gray-300': i > 4 }" fill="currentColor"
             viewBox="0 0 20 20">
