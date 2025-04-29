@@ -6,7 +6,7 @@ import axios from './plugins/axios' // Import axios from the plugins folder
 
 createApp(App).mount('#app')  // Import the main App component
 
-import './assets/main.scss' // Import global styles
+import '@styles/main.scss' // Import global styles
 
 const app = createApp(App)  // Create the Vue app instance
 
