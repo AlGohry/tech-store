@@ -80,7 +80,7 @@
                   <span class="px-3 py-1">1</span>
                   <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
                 </div>
-                <button
+                <button @click="addProductToCart"
                   class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-300">
                   Add to Cart
                 </button>
@@ -98,8 +98,9 @@
 
 <script>
 import axios from '../plugins/axios'; // Import axios from the plugins folder
-import NavBar from '../components/NavBar.vue'; // Import NavBar component
-import Footer from '../components/Footer.vue'; // Import Footer component
+import NavBar from '@components/NavBar.vue'; // Import NavBar component
+import Footer from '@components/Footer.vue'; // Import Footer component
+import { useCartStore } from '../store/cartStore'; // Import cartStore
 
 export default {
   components: {
@@ -123,8 +124,14 @@ export default {
       } catch (error) {
         console.error('Error fetching product:', error)
       }
+    },
+    addProductToCart() {
+      const cartStore = useCartStore()
+      cartStore.addToCart(this.product)
+      // console.log('🛒 Products in cart:', cartStore.cartItems)
     }
   }
+
 }
 </script>
 

@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md  duration-300">
+  <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md  duration-300">
     <div class="relative">
       <img :src="product.image" :alt="product.name" class="w-full h-56 object-cover">
       <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -26,15 +25,16 @@
 
       <div class="flex space-x-2">
         <router-link :to="'/product/' + product._id"
-          class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-center font-medium transition-colors duration-300">
+          class="flex-1 btn-primary py-2 px-4 rounded-lg text-center font-medium transition-colors duration-300">
           View Details
         </router-link>
-        <button
-          class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-medium transition-colors duration-300">
+
+        <button @click="addToCart" class="btn-primary py-2 px-4 rounded-lg font-medium transition-colors duration-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
           </svg>
         </button>
+        
       </div>
     </div>
   </div>
@@ -42,12 +42,29 @@
 
 
 <script>
+import { useCartStore } from '@/store/cartStore'
+import { computed } from 'vue'
+
 export default {
   props: {
     product: Object
+  },
+  setup(props) {
+    const cartStore = useCartStore()
+
+    const addToCart = () => {
+      cartStore.addToCart(props.product)
+      console.log('🛒 Product added from card:', props.product)
+      console.log('📦 Total quantity in cart:', cartStore.totalQuantity)
+    }
+
+    return {
+      addToCart
+    }
   }
 }
 </script>
+
 
 <style scoped>
 /* يمكن إضافة بعض الأنماط الخاصة بالمنتج */
