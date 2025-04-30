@@ -1,22 +1,28 @@
+// Import core dependencies
 import { createApp } from 'vue'
 import App from './App.vue'
+
+// Import plugins and libraries
 import router from './router'
 import { createPinia } from 'pinia'
-import axios from './plugins/axios' // Import axios from the plugins folder
-import Toast from 'vue-toastification' // Import Toast for notifications
-import 'vue-toastification/dist/index.css' // Import Toast CSS
+import axios from './plugins/axios' // Axios plugin
+import Toast from 'vue-toastification' // Toast notifications
+import 'vue-toastification/dist/index.css' // Toast CSS
 
-createApp(App).mount('#app')  // Import the main App component
+// Import global styles
+import '@styles/main.scss'
 
-import '@styles/main.scss' // Import global styles
+// Create the Vue app instance
+const app = createApp(App)
 
-const app = createApp(App)  // Create the Vue app instance
-
-// Set axios as a global property
+// Configure global properties
 app.config.globalProperties.$axios = axios
 
-app.use(Toast); // Toast notifications
-app.use(createPinia())  // Pinia for state management
+// Register plugins
+app.use(createPinia()) // Pinia for state management
 app.use(router) // Vue Router for routing
-app.mount('#app') // Mount the app to the DOM
+app.use(Toast) // Toast notifications
+
+// Mount the app to the DOM
+app.mount('#app')
 
