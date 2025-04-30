@@ -11,6 +11,7 @@ import 'vue-toastification/dist/index.css' // Toast CSS
 
 // Import global styles
 import '@styles/main.scss'
+import '@styles/toast.scss'
 
 // Create the Vue app instance
 const app = createApp(App)
