@@ -97,7 +97,7 @@
               </svg>
               <span v-if="cartStore.cartItems.length > 0"
                 class="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                {{ cartStore.totalQuantity }}
+                {{ cartStore.totalProductsQuantity }}
               </span>
             </router-link>
 

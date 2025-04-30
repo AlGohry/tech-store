@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md  duration-300">
+  <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md duration-300">
     <div class="relative">
       <img :src="product.image" :alt="product.name" class="w-full h-56 object-cover">
       <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -34,30 +34,43 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
           </svg>
         </button>
-
       </div>
     </div>
   </div>
 </template>
 
-
 <script setup>
 import { useCartStore } from '@/store/cartStore'
+import { useToast } from 'vue-toastification'
+import { defineProps } from 'vue'
 
-defineProps({
-  product: Object
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true
+  }
 })
 
 const cartStore = useCartStore()
+const toast = useToast()
 
 const addToCart = () => {
-  cartStore.addToCart(product)
+  cartStore.addToCart(props.product)
+  logProductAddition(props.product, cartStore.totalProductsQuantity)
+  showToast()
+}
+console.log(cartStore.productSubtotals) // Array of subtotals for each product
+console.log(cartStore.totalProductsPrice) // Total price of all products
+
+const logProductAddition = (product, totalProductsQuantity) => {
   console.log('🛒 Product added from card:', product)
-  console.log('📦 Total quantity in cart:', cartStore.totalQuantity)
+  console.log('📦 Total quantity in cart:', totalProductsQuantity)
+}
+
+const showToast = () => {
+  toast.success('Product added to cart', {
+    timeout: 2000,
+    position: 'top-right'
+  })
 }
 </script>
-
-
-<style scoped>
-/* يمكن إضافة بعض الأنماط الخاصة بالمنتج */
-</style>
