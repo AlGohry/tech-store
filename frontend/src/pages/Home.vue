@@ -65,39 +65,28 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import axios from '../plugins/axios'; // Import axios from the plugins folder
 import ProductCard from '../components/ProductCard.vue'; // Corrected import path
 import NavBar from '../components/NavBar.vue'; // Import NavBar component
 import Footer from '../components/Footer.vue'; // Import Footer component
-import BannerCarousel from '../components/BannerCarousel.vue' // Import BannerCarousel component
+import BannerCarousel from '../components/BannerCarousel.vue'; // Import BannerCarousel component
 
-export default {
-  components: {
-    ProductCard,
-    NavBar, // Register NavBar component
-    Footer, // Register Footer component
-    BannerCarousel // Register BannerCarousel component
-  },
-  data() {
-    return {
-      products: []
-    }
-  },
-  mounted() {
-    this.fetchProducts()
-  },
-  methods: {
-    async fetchProducts() {
-      try {
-        const response = await axios.get('/')
-        this.products = response.data
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
+const products = ref([]);
+
+const fetchProducts = async () => {
+  try {
+    const response = await axios.get('/');
+    products.value = response.data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
   }
-}
+};
+
+onMounted(() => {
+  fetchProducts();
+});
 </script>
 
 <style scoped>

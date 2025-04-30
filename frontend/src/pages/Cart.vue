@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
-      <!-- NavBar component -->
-      <NavBar />
-      <div class="flex-grow container mx-auto px-4 py-12">
+    <!-- NavBar component -->
+    <NavBar />
+    <div class="flex-grow container mx-auto px-4 py-12">
       <!-- Page Title -->
       <div class="flex items-center mb-8">
         <h1 class="text-3xl font-bold text-gray-800 dark:text-white flex items-center">
@@ -134,71 +134,65 @@
       </div>
 
     </div>
-      <!-- Footer component -->
-      <Footer />
+    <!-- Footer component -->
+    <Footer />
 
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import NavBar from '@components/NavBar.vue'
 import Footer from '@components/Footer.vue'
 import { Icon } from '@iconify/vue'
 
-export default {
-  name: 'CartPage',
-  components: {
-    NavBar,
-    Footer,
-    Icon
+const router = useRouter()
+
+const cartItems = ref([
+  {
+    id: 1,
+    name: 'Premium Smartphone X9',
+    image: '/images/products/phone-1.jpg',
+    price: 899.99,
+    quantity: 1
   },
-  data() {
-    return {
-      cartItems: [
-        {
-          id: 1,
-          name: 'Premium Smartphone X9',
-          image: '/images/products/phone-1.jpg',
-          price: 899.99,
-          quantity: 1
-        },
-        {
-          id: 2,
-          name: 'Wireless Earbuds Pro',
-          image: '/images/products/earbuds-1.jpg',
-          price: 129.99,
-          quantity: 2
-        }
-      ],
-      shippingCost: 0,
-      discount: 50.00
-    }
-  },
-  computed: {
-    subtotal() {
-      return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    },
-    total() {
-      return this.subtotal + this.shippingCost - this.discount
-    }
-  },
-  methods: {
-    increaseQuantity(id) {
-      const item = this.cartItems.find(item => item.id === id)
-      if (item) item.quantity++
-    },
-    decreaseQuantity(id) {
-      const item = this.cartItems.find(item => item.id === id)
-      if (item && item.quantity > 1) item.quantity--
-    },
-    removeItem(id) {
-      this.cartItems = this.cartItems.filter(item => item.id !== id)
-    },
-    proceedToCheckout() {
-      // Navigate to checkout page
-      this.$router.push('/checkout')
-    }
+  {
+    id: 2,
+    name: 'Wireless Earbuds Pro',
+    image: '/images/products/earbuds-1.jpg',
+    price: 129.99,
+    quantity: 2
   }
+])
+
+const shippingCost = ref(0)
+const discount = ref(50.00)
+
+const subtotal = computed(() =>
+  cartItems.value.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+)
+
+const total = computed(() =>
+  subtotal.value + shippingCost.value - discount.value
+)
+
+const increaseQuantity = (id) => {
+  const item = cartItems.value.find(item => item.id === id)
+  if (item) item.quantity++
+}
+
+const decreaseQuantity = (id) => {
+  const item = cartItems.value.find(item => item.id === id)
+  if (item && item.quantity > 1) item.quantity--
+}
+
+const removeItem = (id) => {
+  cartItems.value = cartItems.value.filter(item => item.id !== id)
+}
+
+const proceedToCheckout = () => {
+  router.push('/checkout')
 }
 </script>
 

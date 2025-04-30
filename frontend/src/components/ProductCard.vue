@@ -34,34 +34,26 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
           </svg>
         </button>
-        
+
       </div>
     </div>
   </div>
 </template>
 
 
-<script>
+<script setup>
 import { useCartStore } from '@/store/cartStore'
-import { computed } from 'vue'
 
-export default {
-  props: {
-    product: Object
-  },
-  setup(props) {
-    const cartStore = useCartStore()
+defineProps({
+  product: Object
+})
 
-    const addToCart = () => {
-      cartStore.addToCart(props.product)
-      console.log('🛒 Product added from card:', props.product)
-      console.log('📦 Total quantity in cart:', cartStore.totalQuantity)
-    }
+const cartStore = useCartStore()
 
-    return {
-      addToCart
-    }
-  }
+const addToCart = () => {
+  cartStore.addToCart(product)
+  console.log('🛒 Product added from card:', product)
+  console.log('📦 Total quantity in cart:', cartStore.totalQuantity)
 }
 </script>
 

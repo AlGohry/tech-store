@@ -96,45 +96,36 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import axios from '../plugins/axios'; // Import axios from the plugins folder
 import NavBar from '@components/NavBar.vue'; // Import NavBar component
 import Footer from '@components/Footer.vue'; // Import Footer component
 import { useCartStore } from '../store/cartStore'; // Import cartStore
 
-export default {
-  components: {
-    NavBar, // Register NavBar component
-    Footer // Register Footer component
-  },
-  data() {
-    return {
-      product: null
-    }
-  },
-  mounted() {
-    this.fetchProduct()
-  },
-  methods: {
-    async fetchProduct() {
-      const productId = this.$route.params.id
-      try {
-        const response = await axios.get(`/${productId}`)
-        this.product = response.data
-      } catch (error) {
-        console.error('Error fetching product:', error)
-      }
-    },
-    addProductToCart() {
-      const cartStore = useCartStore()
-      cartStore.addToCart(this.product)
-      // console.log('🛒 Products in cart:', cartStore.cartItems)
-    }
+const product = ref(null);
+const route = useRoute();
+const cartStore = useCartStore();
+
+const fetchProduct = async () => {
+  const productId = route.params.id;
+  try {
+    const response = await axios.get(`/${productId}`);
+    product.value = response.data;
+  } catch (error) {
+    console.error('Error fetching product:', error);
   }
+};
 
-}
+const addProductToCart = () => {
+  cartStore.addToCart(product.value);
+};
+
+onMounted(() => {
+  fetchProduct();
+});
 </script>
-
 <style scoped>
-/* يمكن إضافة بعض الأنماط الخاصة هنا */
+
 </style>
