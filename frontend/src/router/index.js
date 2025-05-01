@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 import ProductDetails from '../pages/ProductDetails.vue'
-import Cart from '../pages/Cart.vue' 
+import Cart from '../pages/Cart.vue'
+import Smartphones from '../pages/Smartphones.vue' // Import Smartphones page
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/smartphones', // New route for Smartphones
+    name: 'Smartphones',
+    component: Smartphones
   }
 ]
 
@@ -27,3 +33,4 @@ const router = createRouter({
 })
 
 export default router
+
