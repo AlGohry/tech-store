@@ -10,8 +10,8 @@ import Toast from 'vue-toastification' // Toast notifications
 import 'vue-toastification/dist/index.css' // Toast CSS
 
 // Import global styles
-import '@styles/main.scss'
-import '@styles/toast.scss'
+import '@Styles/main.scss'
+import '@Styles/toast.scss'
 
 // Create the Vue app instance
 const app = createApp(App)
