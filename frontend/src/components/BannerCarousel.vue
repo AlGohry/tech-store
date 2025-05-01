@@ -1,5 +1,5 @@
 <template>
-  <div class="relative container mx-auto px-4 overflow-hidden rounded-xl shadow-md mb-5 mt-5">
+  <div class="relative container mx-auto overflow-hidden rounded-xl shadow-md mb-5 mt-5">
     <div class="flex transition-transform duration-700 ease-in-out"
       :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
       <div v-for="(banner, index) in banners" :key="index" class="min-w-full h-64 bg-center bg-cover cursor-pointer"
@@ -22,8 +22,8 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
-import banner1 from "@styles/banners/banner1.png";
-import banner2 from "@styles/banners/banner2.png";
+import banner1 from "@Styles/banners/banner1.png";
+import banner2 from "@Styles/banners/banner2.png";
 
 const router = useRouter();
 

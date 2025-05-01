@@ -100,8 +100,8 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from '../plugins/axios'; // Import axios from the plugins folder
-import NavBar from '@components/NavBar.vue'; // Import NavBar component
-import Footer from '@components/Footer.vue'; // Import Footer component
+import NavBar from '@Components/NavBar.vue'; // Import NavBar component
+import Footer from '@Components/Footer.vue'; // Import Footer component
 import { useCartStore } from '../store/cartStore'; // Import cartStore
 
 const product = ref(null);
