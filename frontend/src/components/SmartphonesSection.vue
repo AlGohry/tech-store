@@ -1,5 +1,4 @@
 <template>
-  <div class="mb-10">
     <!-- Section Title -->
     <div class="flex items-center justify-between mb-6">
       <div class="flex items-center space-x-4">
@@ -60,7 +59,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>

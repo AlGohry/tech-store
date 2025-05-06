@@ -1,131 +1,107 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex flex-col">
-    <!-- NavBar component -->
-    <NavBar />
+  <div class="container mx-auto px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-gray-500 mb-6">
+      <router-link to="/" class="hover:underline">Home</router-link> /
+      <router-link :to="`/${product.category}`" class="hover:underline">
+        {{ product.category }}
+      </router-link> /
+      <span class="text-gray-800">{{ product.name }}</span>
+    </nav>
 
-    <div class="flex-grow container mx-auto px-4 py-12">
-      <div v-if="product" class="max-w-6xl mx-auto">
-        <!-- Breadcrumb -->
-        <nav class="flex mb-8" aria-label="Breadcrumb">
-          <ol class="inline-flex items-center space-x-1 md:space-x-3">
-            <li class="inline-flex items-center">
-              <router-link to="/"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-                  </path>
-                </svg>
-                Home
-              </router-link>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ product.name }}</span>
-              </div>
-            </li>
-          </ol>
-        </nav>
+    <!-- Product Display -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <!-- Image Gallery -->
+      <div>
+        <img :src="selectedImage" alt="Main Image" class="w-full h-[400px] object-contain rounded-xl mb-4 shadow-md" />
+        <div class="flex gap-4">
+          <img v-for="(img, index) in product.images || [product.image]" :key="index" :src="img"
+            @click="selectedImage = img"
+            :class="['w-20 h-20 object-contain border rounded cursor-pointer', img === selectedImage ? 'border-primary' : '']" />
+        </div>
+      </div>
 
-        <!-- Product content -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-          <div class="md:flex">
-            <div class="md:w-1/2 p-6">
-              <img :src="product.image" :alt="product.name" class="w-full h-auto max-h-96 object-contain rounded-lg">
-              <div class="flex mt-4 space-x-2">
-                <button v-for="(img, index) in [product.image, product.image, product.image]" :key="index"
-                  class="w-16 h-16 border border-gray-200 rounded-md overflow-hidden">
-                  <img :src="img" class="w-full h-full object-cover">
-                </button>
-              </div>
-            </div>
+      <!-- Product Info -->
+      <div class="space-y-4">
+        <h1 class="text-3xl font-bold text-gray-800">{{ product.name }}</h1>
+        <p class="text-gray-600">{{ product.description }}</p>
+        <p class="text-xl font-semibold text-primary">SAR {{ product.price }}</p>
+        <p><strong>Brand:</strong> {{ product.brand }}</p>
+        <p><strong>In Stock:</strong> {{ product.countInStock }}</p>
 
-            <div class="md:w-1/2 p-6">
-              <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ product.name }}</h1>
+        <!-- Quantity Selector -->
+        <div class="flex items-center gap-2">
+          <button @click="qty--" :disabled="qty <= 1" class="px-3 py-1 bg-gray-200 rounded">-</button>
+          <span>{{ qty }}</span>
+          <button @click="qty++" :disabled="qty >= product.countInStock"
+            class="px-3 py-1 bg-gray-200 rounded">+</button>
+        </div>
 
-              <div class="flex items-center mb-4">
-                <div class="flex items-center text-yellow-400 mr-2">
-                  <svg v-for="i in 5" :key="i" class="w-5 h-5" :class="{ 'text-gray-300': i > 4 }" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                    </path>
-                  </svg>
-                </div>
-                <span class="text-gray-600 text-sm">(24 reviews)</span>
-              </div>
+        <!-- Add to Cart -->
+        <button @click="addProductToCart" class="btn-primary px-5 py-2 rounded mt-4">Add to Cart</button>
 
-              <span class="text-3xl font-bold text-gray-900 block mb-6">SAR {{ product.price }}</span>
+        <!-- Highlights -->
+        <ul class="mt-6 space-y-2 text-gray-700 list-disc list-inside">
+          <li>Powerful Snapdragon 8 Gen processor</li>
+          <li>High-resolution AMOLED display</li>
+          <li>Long battery life with fast charging</li>
+          <li>5G connectivity and Android 13</li>
+        </ul>
+      </div>
+    </div>
 
-              <p class="text-gray-700 mb-6">{{ product.description }}</p>
-
-              <div class="mb-6">
-                <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
-                <ul class="mt-2 list-disc list-inside text-sm text-gray-600 space-y-1">
-                  <li>Latest generation technology</li>
-                  <li>Energy efficient design</li>
-                  <li>2-year manufacturer warranty</li>
-                  <li>Free shipping on all orders</li>
-                </ul>
-              </div>
-
-              <div class="flex items-center space-x-4">
-                <div class="flex items-center border border-gray-300 rounded-lg">
-                  <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
-                  <span class="px-3 py-1">1</span>
-                  <button class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
-                </div>
-                <button @click="addProductToCart"
-                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-300">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
+    <!-- Related Products -->
+    <div v-if="relatedProducts.length" class="mt-16">
+      <h2 class="text-2xl font-bold mb-4">You may also like</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div v-for="item in relatedProducts" :key="item._id"
+          class="border p-4 rounded-xl shadow hover:shadow-lg transition">
+          <img :src="item.image" alt="" class="w-full h-40 object-cover rounded mb-3" />
+          <h3 class="font-semibold text-lg line-clamp-1">{{ item.name }}</h3>
+          <p class="text-sm text-gray-500 line-clamp-2">{{ item.description }}</p>
+          <div class="flex justify-between items-center mt-3">
+            <span class="text-primary font-bold">SAR {{ item.price }}</span>
+            <router-link :to="`/product/${item._id}`" class="text-sm text-primary underline">View</router-link>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Footer component -->
-    <Footer />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import axios from '../plugins/axios'; // Import axios from the plugins folder
-import NavBar from '@Components/NavBar.vue'; // Import NavBar component
-import Footer from '@Components/Footer.vue'; // Import Footer component
-import { useCartStore } from '../store/cartStore'; // Import cartStore
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import axios from '../plugins/axios'
+import { useCartStore } from '../store/cartStore'
 
-const product = ref(null);
-const route = useRoute();
-const cartStore = useCartStore();
+const product = ref({})
+const relatedProducts = ref([])
+const selectedImage = ref('')
+const qty = ref(1)
+
+const route = useRoute()
+const cartStore = useCartStore()
 
 const fetchProduct = async () => {
-  const productId = route.params.id;
   try {
-    const response = await axios.get(`/${productId}`);
-    product.value = response.data;
-  } catch (error) {
-    console.error('Error fetching product:', error);
+    const res = await axios.get(`/${route.params.id}`)
+    product.value = res.data
+    selectedImage.value = product.value.images?.[0] || product.value.image
+
+    // Get related products by category
+    const related = await axios.get(`/${product.category}`)
+    relatedProducts.value = related.data.filter(p => p._id !== product.value._id)
+  } catch (err) {
+    console.error(err)
   }
-};
+}
 
 const addProductToCart = () => {
-  cartStore.addToCart(product.value);
-};
+  cartStore.addToCart({ ...product.value, qty: qty.value })
+}
 
 onMounted(() => {
-  fetchProduct();
-});
+  fetchProduct()
+})
 </script>
-<style scoped>
-
-</style>
