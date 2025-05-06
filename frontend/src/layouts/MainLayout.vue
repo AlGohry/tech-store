@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex flex-col">
+  <div class="min-h-screen flex flex-col">
     <NavBar />
 
     <div class="flex-grow container mx-auto px-4 py-6">

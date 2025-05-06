@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-100 py-3 mt-10">
+  <footer class="bg-white py-3 mt-10">
     <div class="container mx-auto px-4 text-gray-700">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Payment Methods -->
