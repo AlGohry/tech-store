@@ -26,6 +26,7 @@
 
     <!-- Cart Content -->
     <div v-else class="flex flex-col lg:flex-row gap-8">
+      
       <!-- Product List (New Style) -->
       <div class="lg:w-2/3 space-y-4">
         <div v-for="item in cartItems" :key="item.id" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4">
@@ -156,7 +157,7 @@
             </div>
             <div class="flex justify-between">
               <span class="text-gray-600 dark:text-gray-300">Shipping</span>
-              <span class="font-medium">{{ shippingCost === 0 ? 'Free' : `SAR SAR {shippingCost.toFixed(2)}` }}</span>
+              <span class="font-medium">{{ shippingCost === 0 ? 'Free' : `SAR ${shippingCost.toFixed(2)}` }}</span>
             </div>
             <div v-if="discount > 0" class="flex justify-between text-green-600">
               <span>Discount</span>
