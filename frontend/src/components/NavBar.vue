@@ -63,16 +63,16 @@
 
           <!-- Language Selector -->
           <div class="relative group">
-            <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+            <button type="button" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
               <Icon icon="mdi:translate" class="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </button>
             <div
               class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <button
+              <button type="button"
                 class="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="text-sm">Arabic</span>
               </button>
-              <button
+              <button type="button"
                 class="flex items-center w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span class="text-sm">English</span>
               </button>
@@ -80,8 +80,11 @@
           </div>
 
           <!-- Theme Toggle -->
-          <button @click="toggleTheme" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
-            <Icon v-if="darkMode" icon="mdi:weather-sunny" class="w-5 h-5 text-gray-600 dark:text-gray-300" />
+          <button @click="toggleDark" class="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+            :title="themeStore.dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+            <!-- Sun Icon -->
+            <Icon v-if="themeStore.dark" icon="mdi:weather-sunny" class="w-5 h-5 text-gray-600 dark:text-gray-300" />
+            <!-- Moon Icon -->
             <Icon v-else icon="mdi:weather-night" class="w-5 h-5 text-gray-600 dark:text-gray-300" />
           </button>
 
@@ -110,7 +113,7 @@
           </router-link>
 
           <div v-else class="relative group">
-            <button class="flex items-center space-x-2">
+            <button type="button" class="flex items-center space-x-2">
               <div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center text-black font-medium">
                 AH
               </div>
@@ -127,7 +130,7 @@
                 <Icon icon="mdi:shopping-outline" class="text-xl text-gray-600 dark:text-gray-300" />
                 <span class="ml-2">My Orders</span>
               </router-link>
-              <button @click="logout"
+              <button type="button" @click="logout"
                 class="flex items-center w-full text-left px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <Icon icon="mdi:logout" class="text-xl text-gray-600 dark:text-gray-300" />
                 <span class="ml-2">Logout</span>
@@ -145,6 +148,11 @@
 import { ref } from 'vue'
 import { useCartStore } from '@/store/cartStore'
 import { Icon } from '@iconify/vue';
+import { useThemeStore } from '@/store/themeStore'
+
+const themeStore = useThemeStore()
+const toggleDark = () => themeStore.toggleDark()
+
 const showCart = ref(false)
 const isAuthenticated = ref(true) // مؤقتًا
 const userName = ref('Ahmed') // مؤقتًا

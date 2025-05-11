@@ -13,6 +13,8 @@ import 'vue-toastification/dist/index.css' // Toast CSS
 import '@Styles/main.scss'
 import '@Styles/toast.scss'
 
+import { useThemeStore, initThemeWatcher } from '@/store/themeStore'
+
 // Create the Vue app instance
 const app = createApp(App)
 
@@ -23,6 +25,15 @@ app.config.globalProperties.$axios = axios
 app.use(createPinia()) // Pinia for state management
 app.use(router) // Vue Router for routing
 app.use(Toast) // Toast notifications
+
+// Register global components
+const pinia = createPinia()
+app.use(pinia)
+
+// Initialize the theme store and watcher
+const themeStore = useThemeStore(pinia)
+initThemeWatcher(themeStore)
+
 
 // Mount the app to the DOM
 app.mount('#app')
