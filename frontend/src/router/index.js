@@ -5,6 +5,7 @@ import Home from '../pages/Home.vue'
 import ProductDetails from '../pages/ProductDetails.vue'
 import Cart from '../pages/Cart.vue'
 import Smartphones from '../pages/Smartphones.vue'
+import Checkout from '../pages/Checkout.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
         path: 'smartphones',
         name: 'Smartphones',
         component: Smartphones
+      },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: Checkout
       }
     ]
   }
