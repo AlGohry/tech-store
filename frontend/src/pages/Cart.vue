@@ -188,8 +188,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import NavBar from '@Components/NavBar.vue'
-import Footer from '@Components/Footer.vue'
 import { Icon } from '@iconify/vue'
 import { useCartStore } from '@/store/cartStore'
 
