@@ -91,8 +91,7 @@
                 <span class="block font-medium">Mada</span>
                 <span class="block text-sm text-gray-500">Secure online payment</span>
               </div>
-              <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/8_1739350583.svg" alt="Mada"
-                class="ml-auto h-8">
+              <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/8_1739350583.svg" alt="Mada" class="ml-auto h-8">
             </label>
 
             <label
@@ -103,8 +102,7 @@
                 <span class="block text-sm text-gray-500">Visa, Mastercard {{ savedCard ? `(**** **** **** ${savedCard.number.slice(-4)})` : '' }}</span>
               </div>
               <div class="ml-auto flex space-x-2">
-                <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/6_1739350628.svg" alt="Visa"
-                  class="h-8">
+                <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/6_1739350628.svg" alt="Visa" class="h-8">
               </div>
             </label>
 
@@ -115,8 +113,7 @@
                 <span class="block font-medium">Apple Pay</span>
                 <span class="block text-sm text-gray-500">Pay with Apple Pay</span>
               </div>
-              <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/13_1739357245.png" alt="Apple Pay"
-                class="ml-auto h-8">
+              <img src="https://s101.daleelstore.com/public/PaymentMethod/footer_icon/13_1739357245.png" alt="Apple Pay" class="ml-auto h-8">
             </label>
 
             <label
@@ -126,8 +123,7 @@
                 <span class="block font-medium">Cash on Delivery (COD)</span>
                 <span class="block text-sm text-gray-500">Pay when you receive your order</span>
               </div>
-              <img src="https://www.jarir.com/assets/images/svg/payondeliverywithcard.svg" alt="Cash on Delivery"
-                class="ml-auto h-8">
+              <img src="https://www.jarir.com/assets/images/svg/payondeliverywithcard.svg" alt="Cash on Delivery" class="ml-auto h-8">
             </label>
 
           </div>
@@ -299,6 +295,7 @@ import { useCartStore } from '@/store/cartStore'
 
 const cartStore = useCartStore()
 const cartItems = computed(() => cartStore.cartItems)
+const storeName = ref('Tech Store')
 
 // الراوتر
 const router = useRouter()
